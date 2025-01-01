@@ -3,7 +3,7 @@ export default function Tasks() {
 
     return(
         <>
-            <h1>This is Task</h1>
+            <h2>Tasks associated with event: </h2>
             <TaskList/>
         </>
         

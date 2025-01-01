@@ -30,9 +30,9 @@ export default function CenteredTabs() {
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab label="Events" />
-        <Tab label="Attendees" />
-        <Tab label="Tasks" />
+        <Tab label="Events" sx={{ fontSize: '1.25rem' }}/>
+        <Tab label="Attendees" sx={{ fontSize: '1.25rem' }}/>
+        <Tab label="Tasks" sx={{ fontSize: '1.25rem' }}/>
       </Tabs>
       <Box sx={{ mt: 2 }}>
         {renderTabContent()}

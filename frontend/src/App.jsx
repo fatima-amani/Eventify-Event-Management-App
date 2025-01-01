@@ -1,11 +1,11 @@
 // import "./App.css";
-import SearchAppBar from "./components/SearchAppBar";
+import NavBar from "./components/NavBar";
 import CenteredTabs from "./components/CenteredTabs";
 
 function App() {
   return (
     <>
-    <SearchAppBar/>
+    <NavBar/>
     <CenteredTabs/>
     </>
     

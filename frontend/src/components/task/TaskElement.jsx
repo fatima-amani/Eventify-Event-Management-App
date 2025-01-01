@@ -9,16 +9,16 @@ import { useState } from "react";
 export default function TaskElement({ task, refreshTasks }) {
   const [taskStatus, setTaskStatus] = useState(task.status);
 
-  const updateTask = async () => {
+  const updateTask = async (newStatus) => {
     try {
       const response = await fetch(`http://localhost:3000/task/${task._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ status: taskStatus }), // Send the updated status
+        body: JSON.stringify({ status: newStatus }), // Send the updated status
       });
-
+  
       if (response.ok) {
         refreshTasks(); // Refresh the tasks after a successful update
       } else {
@@ -30,9 +30,9 @@ export default function TaskElement({ task, refreshTasks }) {
   };
 
   const handleChange = async () => {
-    const newStatus = taskStatus === "Pending" ? "Completed" : "Pending";
+    const newStatus = taskStatus === "Pending" ? "Completed" : "Pending"; // Toggle status
+    await updateTask(newStatus); // Send the update to the server after status change
     setTaskStatus(newStatus); // Update the local state
-    await updateTask(); // Send the update to the server
   };
 
   return (
