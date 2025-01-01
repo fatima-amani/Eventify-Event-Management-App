@@ -94,16 +94,3 @@ yarn start</code></pre>
 ├── .gitignore            # Files and directories to ignore
 └── README.md             # This file
 </code></pre>
-
-<h2 id="contributing">Contributing</h2>
-<p>If you'd like to contribute to the development of EventEase, feel free to fork the repository and create a pull request with your changes. Here are a few guidelines to follow:</p>
-<ol>
-  <li>Fork the repository</li>
-  <li>Create a new branch for your changes</li>
-  <li>Make the changes and commit them</li>
-  <li>Push your branch to your fork</li>
-  <li>Submit a pull request</li>
-</ol>
-
-<h2 id="license">License</h2>
-<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
