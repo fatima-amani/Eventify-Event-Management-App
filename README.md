@@ -1,4 +1,4 @@
-<h1>EventEase - Event Management App</h1>
+<h1>Eventify - Event Management App</h1>
 
 <p>EventEase is an event management application designed to help users organize and manage events seamlessly. It has both frontend and backend components, separated into distinct folders for easy management.</p>
 
