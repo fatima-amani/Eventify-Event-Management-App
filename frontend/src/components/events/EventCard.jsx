@@ -9,6 +9,7 @@ import EditEvent from './EditEvent';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useState } from 'react';
+import CreateTask from './CreateTask';
 
 const bull = (
   <Box
@@ -20,7 +21,7 @@ const bull = (
 );
 
 export default function EventCard({event, refreshEvents, OnEditEvent}) {
-  
+  const [isAddingTask, setIsAddingTask] = useState(false);
 
   const editEvent = () => {
     OnEditEvent(event);
@@ -50,6 +51,10 @@ export default function EventCard({event, refreshEvents, OnEditEvent}) {
     timeZoneName: "short"
   });
 
+  const addTask = () => {
+    setIsAddingTask(true);
+  }
+
   return (
     
     <Card sx={{ minWidth: 275 }}>
@@ -67,11 +72,12 @@ export default function EventCard({event, refreshEvents, OnEditEvent}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">View {event.attendees.length} Atteendees</Button>
-        <Button size="small">View Task</Button>
+        {/* <Button size="small">Add Atteendees</Button> */}
+        {!isAddingTask && <Button size="small" onClick={addTask}>Add Task</Button>}
       </CardActions>
-
+      {isAddingTask && <CreateTask setIsAddingTask={setIsAddingTask} eventID={event._id}/> }
       &nbsp;&nbsp;
+      <br /><br />
       <Button variant="contained" onClick={editEvent}>Edit </Button>
       &nbsp;&nbsp;&nbsp;&nbsp;
       <Button variant="outlined" onClick={deleteEvent}>Delete</Button>

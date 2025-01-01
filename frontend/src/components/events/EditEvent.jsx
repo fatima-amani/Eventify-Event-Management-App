@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 export default function EditEvent({ event, setEditingEvent, setIsEditing, refreshEvents }) {
   // Local state to track form data
@@ -58,49 +60,60 @@ export default function EditEvent({ event, setEditingEvent, setIsEditing, refres
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Event Name</label> &nbsp;&nbsp;
-      <input
-        type="text"
-        placeholder="Enter name"
+      <TextField
+        label="Event Name"
+        variant="outlined"
         value={formData.name}
         onChange={handleInputChange}
-        id="name"
         name="name"
+        fullWidth
+        margin="normal"
       />
       <br />
-      <br />
-      <label htmlFor="description">Description</label> &nbsp;&nbsp;
-      <input
-        type="text"
-        placeholder="Enter description"
+      <TextField
+        label="Description"
+        variant="outlined"
         value={formData.description}
         onChange={handleInputChange}
-        id="description"
         name="description"
+        fullWidth
+        margin="normal"
       />
-      <br /><br />
-      <label htmlFor="location">Location</label> &nbsp;&nbsp;
-      <input
-        type="text"
-        placeholder="Enter location"
+      <br />
+      <TextField
+        label="Location"
+        variant="outlined"
         value={formData.location}
         onChange={handleInputChange}
-        id="location"
         name="location"
+        fullWidth
+        margin="normal"
       />
       <br />
-      <br />
-      <label htmlFor="date">Date</label> &nbsp;&nbsp;
-      <input
-        type="datetime-local" // Use datetime-local for date-time input
+      <TextField
+        label="Date"
+        type="datetime-local"
+        variant="outlined"
         value={formData.date ? formData.date.slice(0, 16) : ""} // Format the date to match the input type
         onChange={handleInputChange}
-        id="date"
         name="date"
+        fullWidth
+        margin="normal"
+        
       />
       <br />
-      <br />
-      <button type="submit">Submit</button>
+      <Button type="submit" variant="contained" color="primary">
+        Submit
+      </Button>
+      &nbsp; &nbsp;
+      <Button
+        type="button"
+        variant="outlined"
+        color="secondary"
+        onClick={() => setEditingEvent(false)}
+      >
+        Cancel
+      </Button>
     </form>
   );
 }

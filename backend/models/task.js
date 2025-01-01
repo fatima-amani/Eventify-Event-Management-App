@@ -10,11 +10,12 @@ const taskSchema = new mongoose.Schema({
     enum: ['Pending', 'Completed'], 
     default: 'Pending' 
   },
-  assignedAttendee: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Attendee', 
-    required: true 
-  },
+  assignedAttendee: [
+    { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Attendee', 
+    }
+  ]
 });
 
 const Task = mongoose.model('Task', taskSchema);

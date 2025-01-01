@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 export default function CreateAttendee({ setIsCreating, refreshAttendees }) {
   // Local state to track form data
@@ -19,7 +21,6 @@ export default function CreateAttendee({ setIsCreating, refreshAttendees }) {
 
     try {
       const response = await fetch(`http://localhost:3000/attendee`, {
-        
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Set the request content type to JSON
@@ -41,18 +42,28 @@ export default function CreateAttendee({ setIsCreating, refreshAttendees }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Attendee Name</label> &nbsp;&nbsp;
-      <input
-        type="text"
-        placeholder="Enter name"
+      <TextField
+        label="Attendee Name"
+        variant="outlined"
         value={formData.name}
         onChange={handleInputChange}
-        id="name"
         name="name"
+        fullWidth
+        margin="normal"
       />
       <br />
-      <br />
-      <button type="submit">Submit</button>
+      <Button type="submit" variant="contained" color="primary">
+        Submit
+      </Button>
+      &nbsp; &nbsp;
+      <Button
+        type="button"
+        variant="outlined"
+        color="secondary"
+        onClick={() => setIsCreating(false)}
+      >
+        Cancel
+      </Button>
     </form>
   );
 }

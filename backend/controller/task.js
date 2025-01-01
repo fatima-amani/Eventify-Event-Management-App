@@ -5,13 +5,7 @@ const Event = require('../models/event.js');
 // Create a task
 module.exports.createTask = async (req, res) => {
   try {
-    const { name, deadline, status, assignedAttendee, event } = req.body;
-
-    // Check if attendee exists
-    const attendee = await Attendee.findById(assignedAttendee);
-    if (!attendee) {
-      return res.status(400).json({ message: "Attendee not found" });
-    }
+    const { name, deadline, status,event } = req.body; // Destructure input data
 
     // Check if event exists
     const eventDoc = await Event.findById(event);
@@ -19,11 +13,15 @@ module.exports.createTask = async (req, res) => {
       return res.status(400).json({ message: "Event not found" });
     }
 
-    // Create task
-    const task = new Task({ name, deadline, status, assignedAttendee, event });
+    // Create task (without assignedAttendee)
+    const task = new Task({ name:name, deadline:deadline, status:status,assignedAttendee:[] });
     await task.save();
 
-    res.status(201).json(task);
+    // Add the task ID to the event's tasks array
+    eventDoc.tasks.push(task._id);
+    await eventDoc.save();
+
+    res.status(201).json(task); // Respond with the created task
   } catch (err) {
     res.status(400).json({ message: "Failed to create task", error: err.message });
   }

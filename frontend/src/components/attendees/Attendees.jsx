@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import AttendeeCard from "./AttendeeCard";
 import CreateAttendee from "./CreateAttendee";
-
-
+import AssignAttendee from "./AssignAttendee";
 
 export default function Attendees() {
-  const [attendees, setAttendees] = useState([]); // Initialize state to hold events
+  const [attendees, setAttendees] = useState([]); // Initialize state to hold attendees
   const [loading, setLoading] = useState(false); // Track loading state
   const [error, setError] = useState(null); // Track error state
 
   const [isCreating, setIsCreating] = useState(false);
+  const [isAssigning, setIsAssigning] = useState(false);
+
   const getAttendeeURL = "http://localhost:3000/attendee";
 
   const getAttendees = async () => {
-    try {  
+    try {
       setLoading(true); // Set loading to true while fetching
       const response = await fetch(getAttendeeURL);
       if (!response.ok) {
         throw new Error("Failed to fetch attendees");
       }
       const data = await response.json();
-      setAttendees(data); // Update events state
+      setAttendees(data); // Update attendees state
       setLoading(false); // Set loading to false after data is fetched
     } catch (err) {
       setLoading(false); // Stop loading on error
@@ -34,11 +35,15 @@ export default function Attendees() {
     getAttendees();
   };
 
-  const OnCreateEvent = () => {
+  const onCreateAttendee = () => {
     setIsCreating(true);
-  }
+  };
 
-  // Automatically fetch events when the component mounts
+  const onAssignAttendee = () => {
+    setIsAssigning(true);
+  };
+
+  // Automatically fetch attendees when the component mounts
   useEffect(() => {
     getAttendees();
   }, []); // Empty array means this effect runs only once when the component mounts
@@ -46,24 +51,46 @@ export default function Attendees() {
   return (
     <>
       {isCreating ? (
-        <CreateAttendee setIsCreating={setIsCreating} refreshAttendees={refreshAttendees}/>
+        <CreateAttendee
+          setIsCreating={setIsCreating}
+          refreshAttendees={refreshAttendees}
+        />
+      ) : isAssigning ? (
+        <AssignAttendee
+          setIsAssigning={setIsAssigning}
+          refreshAttendees={refreshAttendees}
+          attendees={attendees}
+        />
       ) : (
         <>
-          <h2>Add a New Attendee &nbsp; &nbsp;
-            <Button variant="contained" onClick={OnCreateEvent} >Add Attendee </Button>
-            </h2>
+          <h2>
+            Add a New Attendee &nbsp; &nbsp;
+            <Button variant="contained" onClick={onCreateAttendee}>
+              Add Attendee
+            </Button>
+          </h2>
+
+          <h2>
+            Assign to an Attendee &nbsp; &nbsp;
+            <Button variant="contained" onClick={onAssignAttendee}>
+              Assign Task
+            </Button>
+          </h2>
+
           {/* Loading state */}
-          {loading && <p>Loading attendee...</p>}
-  
+          {loading && <p>Loading attendees...</p>}
+
           {/* Error state */}
           {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
-          {/* Render events if available */}
+          {/* Render attendees if available */}
           {attendees.length > 0 ? (
-            <AttendeeCard attendees={attendees} refreshAttendees={refreshAttendees}/>
+            <AttendeeCard
+              attendees={attendees}
+              refreshAttendees={refreshAttendees}
+            />
           ) : (
-            // If no events and not loading, display "No events available"
-            !loading && <p>No events available.</p>
+            !loading && <p>No Attendee available.</p>
           )}
         </>
       )}
