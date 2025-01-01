@@ -29,3 +29,5 @@ backend/*.local
 
 # OS generated files
 Thumbs.db
+
+.gitignore
