@@ -32,7 +32,7 @@
 
 <h2 id="installation">Installation</h2>
 <p>Start by cloning the repository to your local machine:</p>
-<pre><code>git clone https://github.com/your-username/eventease-event-management-app.git
+<pre><code>git clone https://github.com/fatima-amani/eventease-event-management-app.git
 cd eventease-event-management-app</code></pre>
 
 <h3 id="frontend-setup">Frontend Setup</h3>
